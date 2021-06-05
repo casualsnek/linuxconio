@@ -21,7 +21,7 @@ On most systems it can be installed by running following commands in terminal em
 Install the dependencies and devDependencies and start the server.
 
 ```sh
-$ git clone https://github.com/trippygeese/linuxconio
+$ git clone https://github.com/casualsnek/linuxconio
 $ cd linuxconio
 $ sudo cp conio.h /usr/include/conio.h
 ```
