@@ -18,7 +18,6 @@ Why use "conio" on linux instead of "curses" or other libraries
 Installation is done by copying "conio.h" file to location where compiler looks for header files Or keeping "conio.h" in same directory as your code and using ``` #include "conio.h"``` instead of ```#include <conio.h> ```
 
 On most systems it can be installed by running following commands in terminal emulator
-Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ git clone https://github.com/casualsnek/linuxconio
