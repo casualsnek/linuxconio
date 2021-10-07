@@ -1,11 +1,11 @@
 # Linux <conio.h>
 ## _"conio.h" implementation for Linux_
 
-This is the implementation of "conio.h" from ms-dos based C compilers for linux systems that i made by collecting various pieces of code found on internet
+This is the implementation of "conio.h" from ms-dos based C compilers for linux/*nix systems
 
 Why use "conio" on linux instead of "curses" or other libraries
-- Because my engineering college forces me to use "conio" library (which is not available on linux) and i have to make sure the code i write runs on my teacher's computer too.
-- Yes that's it !
+- Because my college forces me to use "conio" library (which is not available on linux) and i have to make sure the code i write runs on my teacher's computer too.
+- Yes, this is the only reason
 
 ### Features
 
