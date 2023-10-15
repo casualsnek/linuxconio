@@ -105,9 +105,11 @@ void gotox(unsigned int x)
     printf("\x1b[%dG", x);
 }
 
+// added the fflush function, it might seem like it does nothing, but it helps on some glitches when using gotoxy
 void gotoxy(unsigned int x, unsigned int y)
 {
     printf("\x1b[%d;%df", y, x);
+    fflush(stdout);
 }
 
 void nocursor()
