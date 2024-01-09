@@ -20,41 +20,26 @@
 #define BLINK_RAPID "\x1b[6m"
 #define CC_CLEAR "\x1b[0m"
 
-#define BLACK "\x1b[30m"
-#define RED "\x1b[31m"
-#define GREEN "\x1b[32m"
-#define YELLOW "\x1b[33m"
-#define BLUE "\x1b[34m"
-#define MAGENTA "\x1b[35m"
-#define CYAN "\x1b[36m"
-#define WHITE "\x1b[37m"
-
-#define IBLACK "\x1b[30;1m"
-#define IRED "\x1b[31;1m"
-#define IGREEN "\x1b[32;1m"
-#define IYELLOW "\x1b[33;1m"
-#define IBLUE "\x1b[34;1m"
-#define IMAGENTA "\x1b[35;1m"
-#define ICYAN "\x1b[36;1m"
-#define IWHITE "\x1b[37;1m"
-
-#define BGC_BLACK "\x1b[40m"
-#define BGC_RED "\x1b[41m"
-#define BGC_GREEN "\x1b[42m"
-#define BGC_YELLOW "\x1b[43m"
-#define BGC_BLUE "\x1b[44m"
-#define BGC_MAGENTA "\x1b[45m"
-#define BGC_CYAN "\x1b[46m"
-#define BGC_WHITE "\x1b[47m"
-
-#define BGC_IBLACK "\x1b[40;1m"
-#define BGC_IRED "\x1b[41;1m"
-#define BGC_IGREEN "\x1b[42;1m"
-#define BGC_IYELLOW "\x1b[43;1m"
-#define BGC_IBLUE "\x1b[44;1m"
-#define BGC_IMAGENTA "\x1b[45;1m"
-#define BGC_ICYAN "\x1b[46;1m"
-#define BGC_IWHITE "\x1b[47;1m"
+enum COLORS
+{
+  BLACK = 0,
+  BLUE = 1,
+  GREEN = 2,
+  CYAN = 3,
+  RED = 4,
+  MAGENTA = 5,
+  BROWN = 6,
+  LIGHTGRAY = 7,
+  DARKGRAY = 8,
+  LIGHTBLUE = 9,
+  LIGHTGREEN = 10,
+  LIGHTCYAN = 11,
+  LIGHTRED = 12,
+  LIGHTMAGENTA = 13,
+  YELLOW = 14,
+  WHITE = 15,
+  BLINK = 128
+};
 
 static struct termios oldterm, newterm;
 
@@ -117,7 +102,7 @@ void nocursor()
     printf("\x1b[?25l");
 }
 
-void reset_video()
+void normvideo()
 {
     printf("\x1b[0m");
 }
@@ -127,17 +112,164 @@ void showcursor()
     printf("\x1b[?25h");
 }
 
-void textcolor(char *color)
+void textcolor(int newcolor)
 {
-    printf("%s",color);
+  //https://en.wikipedia.org/wiki/ANSI_escape_code
+
+  const char * s = "\x1b[30m";
+
+  switch (newcolor)
+  {
+  case BLACK:
+    s = "\x1b[30m";
+    break;
+
+  case BLUE:
+    s = "\x1b[34m";
+    break;
+
+  case GREEN:
+    s = "\x1b[32m";
+    break;
+
+  case CYAN:
+    s = "\x1b[36m";
+    break;
+
+  case RED:
+    s = "\x1b[31;1m";
+    break;
+
+  case MAGENTA:
+    s = "\x1b[35m";
+    break;
+
+  case BROWN:
+    s = "\x1b[31m";
+    break;
+
+  case LIGHTGRAY:
+    s = "\x1b[30;1m";
+    break;
+
+  case DARKGRAY:
+    s = "\x1b[30m";
+    break;
+
+  case LIGHTBLUE:
+    s = "\x1b[34;1m";
+    break;
+
+  case LIGHTGREEN:
+    s = "\x1b[32,1m";;
+    break;
+
+  case LIGHTCYAN:
+    s = "\x1b[36;1m";
+    break;
+
+  case LIGHTRED:
+    s = "\x1b[31;1m";
+    break;
+
+  case LIGHTMAGENTA:
+    s = "\x1b[35;1m";
+    break;
+
+  case YELLOW:
+    s = "\x1b[33;1m";
+    break;
+
+  case WHITE:
+    s = "\x1b[37;1m";
+    break;
+
+  case BLINK:
+    s = "\x1b[30m";
+    break;
+  };
+
+  printf("%s", s);
 }
 
-void textbackground(char color[11])
+void textbackground(int newcolor)
 {
-    char col[11];
-    strcpy(col,color);
-    col[2]='4';
-    printf("%s",col);
+  //https://en.wikipedia.org/wiki/ANSI_escape_code
+
+  const char * s = "\x1b[40m";
+
+  switch (newcolor)
+  {
+  case BLACK:
+    s = "\x1b[40m";
+    break;
+
+  case BLUE:
+    s = "\x1b[44m";
+    break;
+
+  case GREEN:
+    s = "\x1b[42m";
+    break;
+
+  case CYAN:
+    s = "\x1b[46m";
+    break;
+
+  case RED:
+    s = "\x1b[41;1m";
+    break;
+
+  case MAGENTA:
+    s = "\x1b[45m";
+    break;
+
+  case BROWN:
+    s = "\x1b[41m";
+    break;
+
+  case LIGHTGRAY:
+    s = "\x1b[40;1m";
+    break;
+
+  case DARKGRAY:
+    s = "\x1b[40m";
+    break;
+
+  case LIGHTBLUE:
+    s = "\x1b[44;1m";
+    break;
+
+  case LIGHTGREEN:
+    s = "\x1b[42,1m";;
+    break;
+
+  case LIGHTCYAN:
+    s = "\x1b[46;1m";
+    break;
+
+  case LIGHTRED:
+    s = "\x1b[41;1m";
+    break;
+
+  case LIGHTMAGENTA:
+    s = "\x1b[45;1m";
+    break;
+
+  case YELLOW:
+    s = "\x1b[43;1m";
+    break;
+
+  case WHITE:
+    s = "\x1b[47;1m";
+    break;
+
+  case BLINK:
+    s = "\x1b[40m";
+    break;
+  };
+
+  printf("%s", s);
 }
 
 void delline()
